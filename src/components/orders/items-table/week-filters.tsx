@@ -39,7 +39,7 @@ export const WeekFilters = () => {
     useEffect(() => {
         if (
             (category === 'Rollforming' || category === 'Trim') &&
-            scheduled &&
+            scheduled === 'true' &&
             !overdue
         ) {
             setDefaultDate(currentWeeksDates?.[0].date)
@@ -55,7 +55,7 @@ export const WeekFilters = () => {
     }, [category, scheduled])
 
     useEffect(() => {
-        if (!scheduled) {
+        if (scheduled !== 'true') {
             dispatch(setDate(''))
         } else {
             if (category === 'Rollforming' || category === 'Trim') {
@@ -64,7 +64,7 @@ export const WeekFilters = () => {
         }
     }, [scheduled, defaultDate])
 
-    return (category === 'Rollforming' || category === 'Trim') && scheduled ? (
+    return (category === 'Rollforming' || category === 'Trim') && scheduled === 'true' ? (
         <div className='flex max-[1118px]:w-full items-center gap-y-10 gap-x-1 overflow-x-scroll p-0.5'>
             <ToggleGroup
                 key={defaultDate}
@@ -119,7 +119,7 @@ const WeekFilter: React.FC<FormattedDate> = ({ date, dateToDisplay }) => {
     return (
         <ToggleGroupItem
             value={date}
-            className='data-[state=on]:shadow-custom shadow-foreground text-[13px] data-[state=on]: -outline-offset-1 max-[1118px]:flex-1 data-[state=on]:outline-1 data-[state=on]:outline-foreground data-[state=on]:outline text-secondary-foreground bg-secondary flex flex-col gap-0.5 h-[41px] py-2 px-1 w-[172px]'>
+            className='data-[state=on]:shadow-custom shadow-foreground text-[13px] data-[state=on]: -outline-offset-1 max-[1118px]:flex-1 data-[state=on]:outline-1 data-[state=on]:outline-foreground data-[state=on]:outline text-secondary-foreground bg-secondary flex flex-col gap-0.5 h-[41px] py-2 px-1 w-[176px]'>
             {isLoading ? (
                 <Skeleton className='w-full h-5' />
             ) : (

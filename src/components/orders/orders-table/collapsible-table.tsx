@@ -1,5 +1,6 @@
 import { Skeleton } from '@radix-ui/themes'
 import { type Table as TableType, flexRender } from '@tanstack/react-table'
+// import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 
 import {
@@ -41,6 +42,8 @@ export const CollapsibleTable: React.FC<Props> = ({ isLoading, table, isFetching
     useEffect(() => {
         table.setRowSelection({})
     }, [scheduled])
+
+    // const MotionTableRow = motion(TableRow, { forwardMotionProps: true })
 
     return (
         <div className='rounded-md'>
@@ -90,6 +93,7 @@ export const CollapsibleTable: React.FC<Props> = ({ isLoading, table, isFetching
                 </TableHeader>
 
                 <TableBody>
+                    {/* <AnimatePresence initial={false}> */}
                     {isLoading ? (
                         <TableSkeleton cellCount={columns.length} />
                     ) : table.getRowModel().rows?.length ? (
@@ -102,6 +106,20 @@ export const CollapsibleTable: React.FC<Props> = ({ isLoading, table, isFetching
                                     asChild>
                                     <>
                                         <TableRow
+                                            // initial={false}
+                                            // animate={{
+                                            //     opacity: 1,
+                                            //     x: 0
+                                            // }}
+                                            // exit={{
+                                            //     opacity:
+                                            //         isFetching || isLoading ? 1 : 0,
+                                            //     x: isFetching || isLoading ? 0 : -1000
+                                            // }}
+                                            // transition={{
+                                            //     duration:
+                                            //         isFetching || isLoading ? 0 : 0.3
+                                            // }}
                                             className='odd:bg-secondary/60'
                                             data-state={
                                                 row.getIsSelected() && 'selected'
@@ -121,6 +139,27 @@ export const CollapsibleTable: React.FC<Props> = ({ isLoading, table, isFetching
                                         <CollapsibleContent asChild>
                                             <tr>
                                                 <td
+                                                    // initial={false}
+                                                    // animate={{
+                                                    //     opacity: 1,
+                                                    //     x: 0
+                                                    // }}
+                                                    // exit={{
+                                                    //     opacity:
+                                                    //         isFetching || isLoading
+                                                    //             ? 1
+                                                    //             : 0,
+                                                    //     x:
+                                                    //         isFetching || isLoading
+                                                    //             ? 0
+                                                    //             : -1000
+                                                    // }}
+                                                    // transition={{
+                                                    //     duration:
+                                                    //         isFetching || isLoading
+                                                    //             ? 0
+                                                    //             : 0.3
+                                                    // }}
                                                     className='max-w-[100vw]'
                                                     colSpan={colSpan}>
                                                     <SubTable data={originItems} />
@@ -142,6 +181,7 @@ export const CollapsibleTable: React.FC<Props> = ({ isLoading, table, isFetching
                             </TableCell>
                         </TableRow>
                     )}
+                    {/* </AnimatePresence> */}
                 </TableBody>
             </Table>
         </div>

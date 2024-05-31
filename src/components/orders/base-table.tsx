@@ -1,4 +1,5 @@
 import { type Table as TableType, flexRender } from '@tanstack/react-table'
+// import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment, useEffect } from 'react'
 
 import { Badge } from '../ui/badge'
@@ -72,6 +73,8 @@ export const BaseTable: React.FC<Props> = ({ isLoading, table, isFetching }) => 
         table.setRowSelection({})
     }, [category, scheduled])
 
+    // const MotionTableRow = motion(TableRow, { forwardMotionProps: true })
+
     return (
         <div className='rounded-md'>
             <Statuses
@@ -124,6 +127,7 @@ export const BaseTable: React.FC<Props> = ({ isLoading, table, isFetching }) => 
                 </TableHeader>
 
                 <TableBody>
+                    {/* <AnimatePresence initial={false}> */}
                     {isLoading ? (
                         <TableSkeleton cellCount={columns.length} />
                     ) : table.getRowModel().rows?.length ? (
@@ -141,7 +145,29 @@ export const BaseTable: React.FC<Props> = ({ isLoading, table, isFetching }) => 
                                     return (
                                         <Fragment key={row.original?.id}>
                                             {index === 0 && (
-                                                <TableRow className=' !p-0'>
+                                                <TableRow
+                                                    // initial={false}
+                                                    // animate={{
+                                                    //     opacity: 1,
+                                                    //     x: 0
+                                                    // }}
+                                                    // exit={{
+                                                    //     opacity:
+                                                    //         isFetching || isLoading
+                                                    //             ? 1
+                                                    //             : 0,
+                                                    //     x:
+                                                    //         isFetching || isLoading
+                                                    //             ? 0
+                                                    //             : -1000
+                                                    // }}
+                                                    // transition={{
+                                                    //     duration:
+                                                    //         isFetching || isLoading
+                                                    //             ? 0
+                                                    //             : 0.3
+                                                    // }}
+                                                    className=' !p-0'>
                                                     <TableCell
                                                         className='!p-0'
                                                         colSpan={colSpan}>
@@ -174,7 +200,27 @@ export const BaseTable: React.FC<Props> = ({ isLoading, table, isFetching }) => 
                                                 </TableRow>
                                             )}
                                             <TableRow
-                                                key={row.original?.id}
+                                                // initial={false}
+                                                // animate={{
+                                                //     opacity: 1,
+                                                //     x: 0
+                                                // }}
+                                                // exit={{
+                                                //     opacity:
+                                                //         isFetching || isLoading
+                                                //             ? 1
+                                                //             : 0,
+                                                //     x:
+                                                //         isFetching || isLoading
+                                                //             ? 0
+                                                //             : -1000
+                                                // }}
+                                                // transition={{
+                                                //     duration:
+                                                //         isFetching || isLoading
+                                                //             ? 0
+                                                //             : 0.3
+                                                // }}
                                                 className='odd:bg-secondary/60'
                                                 data-state={
                                                     row.getIsSelected() && 'selected'
@@ -198,7 +244,19 @@ export const BaseTable: React.FC<Props> = ({ isLoading, table, isFetching }) => 
                             table.getRowModel().rows.map((row) => {
                                 return (
                                     <TableRow
-                                        key={row.id}
+                                        // initial={false}
+                                        // animate={{
+                                        //     opacity: 1,
+                                        //     x: 0
+                                        // }}
+                                        // exit={{
+                                        //     opacity: isFetching || isLoading ? 1 : 0,
+                                        //     x: isFetching || isLoading ? 0 : -1000
+                                        // }}
+                                        // transition={{
+                                        //     duration: isFetching || isLoading ? 0 : 0.3
+                                        // }}
+                                        key={row.original?.id}
                                         className='odd:bg-secondary/60'
                                         data-state={row.getIsSelected() && 'selected'}>
                                         {row.getVisibleCells().map((cell) => (
@@ -226,6 +284,7 @@ export const BaseTable: React.FC<Props> = ({ isLoading, table, isFetching }) => 
                             </TableCell>
                         </TableRow>
                     )}
+                    {/* </AnimatePresence> */}
                 </TableBody>
             </Table>
         </div>
